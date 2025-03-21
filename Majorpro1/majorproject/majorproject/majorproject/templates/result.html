@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Background */
+        body {
+    font-family: Arial, sans-serif;
+    background: url("/static/p4.jpg") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.9); /* Light overlay */
+            padding: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        h2, h3 {
+            text-align: center;
+            color: #333;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Extracted Ingredients Section */
+        .extracted-section {
+            background: linear-gradient(135deg, #ff8c00, #ff3b3b);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .extracted-section h3 {
+            color: white;
+        }
+        .extracted-text {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .extracted-item {
+            background: white;
+            color: #ff3b3b;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: linear-gradient(135deg, #4CAF50, #009688);
+            color: white;
+            text-transform: uppercase;
+        }
+        td {
+            background: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            font-size: 18px;
+            color: red;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ingredient Analysis Results</h2>
+
+        <!-- Extracted Text Section -->
+        <div class="extracted-section">
+            <h3>Extracted Ingredients</h3>
+            <div class="extracted-text">
+                {% for item in extracted_text.split(',') %}
+                    <span class="extracted-item">{{ item.strip() }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Table for Analysis Results -->
+        <div class="table-container">
+            {% if results %}
+                <h3>Analysis Details</h3>
+                <table>
+                    <tr>
+                        <th>Ingredient Name</th>
+                        <th>Chemical Name</th>
+                        <th>Is Harmful</th>
+                        <th>Description</th>
+                        <th>Affected Body Parts</th>
+                        <th>Percentage Effect</th>
+                        <th>Food Sources</th>
+                    </tr>
+                    {% for row in results %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                            <td>{{ row[6] }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p class="no-results">No matching ingredients found.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

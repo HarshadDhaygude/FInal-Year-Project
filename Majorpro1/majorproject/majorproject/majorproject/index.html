@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Analyzer</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Welcome to Ingredient Analyzer</h1>
+    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="image-upload">Upload an ingredient image:</label>
+        <input type="file" id="image-upload" name="image" accept="image/*" required title="Choose an image file to upload for analysis">
+        <button type="submit">Analyze</button>
+    </form>
+
+    <div id="results"></div>
+    <footer>
+        <p style="color: green; font-size: 18px; font-weight: bold;">Contact Details:</p>
+        <p>
+            <strong style="color: #007BFF;">Name:</strong>
+            <span style="color: #28a745;">Major Project</span>
+        </p>
+        <p>
+            <strong style="color: #007BFF;">Email:</strong>
+            <a href="mailto:majorprojectet10@gmail.com" style="color: #dc3545; text-decoration: none; font-weight: bold;">majorprojectet10@gmail.com</a>
+        </p>
+    </footer>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
